@@ -17,7 +17,7 @@ jobs:
     - name: تهيئة repo وتحميل السورس (بـ depth=1)
       run: |
         repo init -u https://android.googlesource.com/platform/manifest -b android-8.1.0_r93 --depth=1
-        repo sync -j4 --depth=1
+        repo sync -j2 --depth=1
 
     - name: تفعيل ccache
       run: |
