@@ -17,21 +17,14 @@ jobs:
     - name: تهيئة repo وتحميل السورس (بـ depth=1)
       run: |
         repo init -u https://android.googlesource.com/platform/manifest -b android-8.1.0_r93 --depth=1
-        repo sync -j2 --depth=1
+        repo sync -j4 --depth=1
 
-    - name: تفعيل ccache
+    - name: بناء AOSP
       run: |
         export USE_CCACHE=1
         export CCACHE_DIR=$HOME/.ccache
         ccache -M 50G
-
-    - name: إعداد بيئة البناء
-      run: |
         source build/envsetup.sh
         lunch aosp_arm64-eng
-
-    - name: تنظيف البناء
-      run: make clean
-
-    - name: بدء البناء
-      run: make -j4
+        make clean
+        make -j4
